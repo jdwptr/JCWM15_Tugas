@@ -18,7 +18,11 @@ class App extends React.Component {
   }
 
   hapus = () => {
-    this.state.kegiatan.splice(0, 1)
+    // let input = this.refs.aktifitas.value
+    let tempHapus = [...this.state.kegiatan]
+    // tempHapus.push(input)
+    tempHapus.splice(0, 1)
+    this.setState({kegiatan: tempHapus})
   }
 
   tampil = () => {

@@ -3,9 +3,9 @@ import {
     Navbar,
     Nav,
     NavDropdown,
-    // Form,
-    // FormControl,
-    // Button
+    Form,
+    FormControl,
+    Button
 } from 'react-bootstrap'
 
 import logo4 from './react.png'
@@ -23,7 +23,7 @@ class Navigation extends React.Component {
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
             <Nav.Link>
-                <Link to="/home">Home</Link>
+                <Link to="/">Home</Link>
             </Nav.Link>
             <Nav.Link>
                 <Link to="/carousel">Carousel</Link>
@@ -32,10 +32,12 @@ class Navigation extends React.Component {
                 <NavDropdown.Item>
                     <Link to="/todolist">To Do List</Link>
                 </NavDropdown.Item>
-                {/* <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                <NavDropdown.Item>
+                    <Link to='/berita'>News</Link>
+                </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
+                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
             </Nav>
             {/* <Form inline>

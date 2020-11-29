@@ -12,9 +12,9 @@ class Linkpage extends React.Component {
             <div style={style.container}>
                 <h1>This is Link Page</h1>
                 <div>
-                    <Link to='/home'>
-                        <Button variant="primary">To Home Page</Button>
-                    </Link>
+                    <Button variant="primary">
+                        <Link to='/' style={{textDecoration: 'none', color: 'white'}}>To Home Page</Link>
+                    </Button>
                 </div>
             </div>
         )

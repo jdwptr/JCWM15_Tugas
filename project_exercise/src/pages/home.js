@@ -12,9 +12,9 @@ class Home extends React.Component {
             <div style={style.container}>
                 <h1>This is Home Page</h1>
                 <div>
-                    <Link to="/linkpage">
-                        <Button variant="primary">To Link Page</Button>
-                    </Link>
+                    <Button variant="primary">
+                        <Link to="/linkpage" style={{textDecoration: 'none', color: 'white'}}>To Link Page</Link>
+                    </Button>
                 {/* <Button variant="primary">To Link Page</Button>{' '} */}
                 </div>
             </div>

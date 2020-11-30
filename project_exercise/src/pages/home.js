@@ -1,5 +1,4 @@
 import React from 'react'
-import Linkpage from './linkpage'
 import {Link} from 'react-router-dom'
 
 import {

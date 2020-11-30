@@ -3,15 +3,11 @@ import Axios from 'axios'
 import {
     Card,
     Button,
-    Nav,
-    NavDropdown,
-    Navbar,
-    Form,
-    FormControl,
+    Dropdown,
+    DropdownButton,
+    DropdownItem,
 } from 'react-bootstrap'
 
-
-// let negara = () => {}
 
 let url = `http://newsapi.org/v2/top-headlines?country=id&apiKey=`
 let key = '51c9cd4791df43c9805672b649f203e7'
@@ -21,17 +17,34 @@ class Berita1 extends React.Component {
         super(props)
         this.state = {
             berita: [],
-            listNeg: ['ar','au','at'],
+            listNeg: [
+                'Argentina',
+                'Australia',
+                'Austria'
+            ],
+            negara: [
+                'http://newsapi.org/v2/top-headlines?country=ar&apiKey=',
+                'http://newsapi.org/v2/top-headlines?country=au&apiKey=',
+                'http://newsapi.org/v2/top-headlines?country=at&apiKey='
+            ],
+            category: [
+                'Business',
+                'Entertainment',
+                'Health',
+                'Science',
+                'Sports',
+                'Technology',
+            ],
+            catLink: [
+                '&category=business',
+                '&category=entertainment',
+                '&category=health',
+                '&category=science',
+                '&category=sports',
+                '&category=technology'
+            ]
         }
     }
-
-    // url = () => {
-    //     return this.state.listNegara.map((item) => {
-    //         return (
-    //             `http://newsapi.org/v2/top-headlines?country=${item}&apiKey=` 
-    //         )
-    //     })
-    // }
 
     componentDidMount() {
         Axios.get(url + key)
@@ -40,6 +53,60 @@ class Berita1 extends React.Component {
                 this.setState({ berita: response.data.articles })
             })
             .catch((error) => console.log(error))
+    }
+
+    dropdownCountry = () => {
+        return (
+            <DropdownButton title='Country'>
+                <div>
+                    {this.state.listNeg.map((item, index) => {
+                        return (
+                            <Dropdown.Item key={index} onClick={() => this.pindahNeg(index)}>
+                                {item}
+                            </Dropdown.Item>
+                        )
+                    })}
+                </div>
+            </DropdownButton>
+
+        )
+    }
+
+    pindahNeg = (index) => {
+        url = this.state.negara[index]
+        Axios.get (url + key)
+            .then((response) => {
+                console.log(response.data)
+                this.setState ({berita: response.data.articles})
+            })
+            .catch((error) => console.log(error))
+        }
+
+    pindahCat = (index) => {
+        let newUrl = url.slice(0, 46) + this.state.catLink[index] + url.slice(46, url.length)
+        Axios.get (newUrl + key)
+            .then((response) => {
+                console.log(response.data)
+                this.setState ({berita: response.data.articles})
+            })
+            .catch((error) => console.log(error))
+        }
+
+    dropdownCategory = () => {
+        return (
+            <DropdownButton title='Category'>
+                <div>
+                    {this.state.category.map((item, index) => {
+                        return (
+                            <Dropdown.Item key={index} onClick={() => this.pindahCat(index)}>
+                                {item}
+                            </Dropdown.Item>
+                        )
+                    })}
+                </div>
+            </DropdownButton>
+
+        )
     }
 
     showCardNews = () => {
@@ -59,46 +126,16 @@ class Berita1 extends React.Component {
         })
     }
 
-    country = () => {
-        // tembak navdropdown COUNTRIES disini
-    }
-
-    topic = () => {
-        // tembak navdropdown TOPIC disini
-    }
 
     render() {
         console.log(this.state.berita)
         return (
             <div>
-                <Navbar bg="light" expand="lg">
-                    <Navbar.Brand href="#home">WORLD NEWS</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
-                            {/* <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#link">Link</Nav.Link> */}
-                            <NavDropdown title="COUNTRIES" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown>
-                            <NavDropdown title="TOPIC" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav>
-                        <Form inline>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            <Button variant="outline-success">Search</Button>
-                        </Form>
-                    </Navbar.Collapse>
-                </Navbar>
+                <div style={{ display: 'flex'}}>
+                    <h1>News API</h1>
+                    <div>{this.dropdownCountry()}</div>
+                    <div>{this.dropdownCategory()}</div>
+                </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                     {this.showCardNews()}
                 </div>

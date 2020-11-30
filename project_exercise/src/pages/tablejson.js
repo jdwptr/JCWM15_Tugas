@@ -82,6 +82,7 @@ class Table1 extends React.Component {
         )
     }
 
+    
     tableSemua = () => {
         return (
             <Table>

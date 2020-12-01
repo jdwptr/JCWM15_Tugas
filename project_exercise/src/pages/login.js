@@ -5,6 +5,12 @@ import {
 } from 'react-bootstrap'
 import Axios from 'axios'
 
+// import action disini
+import { login } from '../action'
+
+// import connect
+import { connect } from 'react-redux'
+
 class Login extends React.Component {
     constructor (props) {
         super (props)
@@ -13,6 +19,8 @@ class Login extends React.Component {
         }
     }
 
+    // ACTION DIPAKAI DISINI
+    // pakai index ke 0 [0] karena ngambil nya pakai query di axios get nya
     btnLogin = () => {
         let username= this.refs.username.value
         let password= this.refs.password.value
@@ -25,8 +33,9 @@ class Login extends React.Component {
             console.log(res.data)
             if (res.data.length === 0) return alert ('Invalid Username or Password')
 
-            this.setState({users: res.data[0]})
-            })
+            // this.setState({users: res.data[0]}) diganti jadi dibawah, pake action
+            this.props.login(res.data[0])
+        })
         .catch((err) => (console.log(err)))
     }
 
@@ -58,4 +67,6 @@ const styles = {
     }
 }
 
-export default Login
+export default connect(null, {login}) (Login)
+// login yg dlm {} itu function login yg di action
+// Login yg di dalam () itu nama class yang diatas

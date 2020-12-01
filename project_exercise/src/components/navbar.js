@@ -11,6 +11,9 @@ import logo4 from './react.png'
 // import link react router dom
 import { Link } from 'react-router-dom'
 
+// import connect
+import {connect} from 'react-redux'
+
 class Navigation extends React.Component {
     render() {
         return (
@@ -43,7 +46,8 @@ class Navigation extends React.Component {
                     </Nav>
                     <Dropdown style={{marginRight: '40px'}}>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Username
+                            {this.props.username ? this.props.username : 'UserName'}
+                            {/* UserName => jd kalo gagal login ga berubah jd nama kita, tetep UserName di dropdownnya */}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
                             <Dropdown.Item as={Link} to="/Login">Login</Dropdown.Item>
@@ -64,4 +68,10 @@ const style = {
     }
 }
 
-export default Navigation
+const mapStateToProps = (state) => {
+    return {
+        username: state.user.username
+    }
+}
+
+export default connect(mapStateToProps) (Navigation)

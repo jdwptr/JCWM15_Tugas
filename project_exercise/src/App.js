@@ -13,6 +13,7 @@ import Todolist from './pages/todolist'
 import Linkpage from './pages/linkpage'
 import Berita1 from './pages/berita'
 import Table1 from './pages/tablejson'
+import Login from './pages/login'
 import Error from './pages/404notfound'
 
 class App extends React.Component {
@@ -27,6 +28,7 @@ class App extends React.Component {
           <Route path="/todolist" component={Todolist}/>
           <Route path='/berita' component={Berita1}/>
           <Route path='/tablejson' component={Table1}/>
+          <Route path='/login' component={Login}/>
           <Route path="*" component={Error}/>
         </Switch>
       </div>

@@ -3,9 +3,7 @@ import {
     Navbar,
     Nav,
     NavDropdown,
-    Form,
-    FormControl,
-    Button
+    Dropdown,
 } from 'react-bootstrap'
 
 import logo4 from './react.png'
@@ -43,10 +41,16 @@ class Navigation extends React.Component {
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
+                    <Dropdown style={{marginRight: '40px'}}>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            Username
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item as={Link} to="/Login">Login</Dropdown.Item>
+                            <Dropdown.Item>Register</Dropdown.Item>
+                            {/* <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Navbar.Collapse>
             </Navbar>
         )

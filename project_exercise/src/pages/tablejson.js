@@ -15,7 +15,7 @@ class Table1 extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get('http://localhost:2000/users')
+        Axios.get('http://localhost:2000/tablejson')
             .then((res) => {
                 console.log(res.data)
                 this.setState ({dbUser: res.data})
@@ -94,7 +94,7 @@ class Table1 extends React.Component {
     }
 
     getDataAxios = () => {
-        Axios.get('http://localhost:2000/users')
+        Axios.get('http://localhost:2000/tablejson')
             .then((res) => {
                 console.log(res.data)
                 this.setState({ dbUser: res.data })
@@ -110,7 +110,7 @@ class Table1 extends React.Component {
     btnDel = (i) => {
         let hapus = i
         console.log('btn delete di klik')
-        Axios.delete (`http://localhost:2000/users/${hapus}`)
+        Axios.delete (`http://localhost:2000/tablejson/${hapus}`)
         .then((res) => {
             console.log(res.data)
             this.getDataAxios()
@@ -132,14 +132,14 @@ class Table1 extends React.Component {
         let email = this.refs.email.value
         console.log(first_name, last_name, email)
 
-        Axios.post('http://localhost:2000/users', {
+        Axios.post('http://localhost:2000/tablejson', {
             first_name,
             last_name,
             email
         })
             .then((res) => {
             console.log(res.data)
-                Axios.get('http://localhost:2000/users')
+                Axios.get('http://localhost:2000/tablejson')
                     .then((res) => {
                         console.log(res.data)
                         this.setState({ dbUser: res.data })

@@ -1,5 +1,5 @@
 {
-  "users": [
+  "tabeljson": [
     {
       "id": 4,
       "first_name": "Robert",
@@ -17,6 +17,21 @@
       "last_name": "Dwiputri",
       "email": "jane.dwptrdjaja@gmail.com",
       "id": 6
+    }
+  ],
+  "users": [
+    {
+      "id":1,
+      "username": "Joey",
+      "password": "1234",
+      "email": "joey@gmail.com"
+    },
+    {
+
+      "id":2,
+      "username": "Jess",
+      "password": "1234",
+      "email": "jess@gmail.com"
     }
   ]
 }

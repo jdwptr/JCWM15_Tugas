@@ -5,6 +5,9 @@ import {
 } from 'react-bootstrap'
 import Axios from 'axios'
 
+// import redirect dr reactrouterdom
+import { Redirect } from 'react-router-dom'
+
 // import action disini
 import { login } from '../action'
 
@@ -34,13 +37,23 @@ class Login extends React.Component {
             if (res.data.length === 0) return alert ('Invalid Username or Password')
 
             // this.setState({users: res.data[0]}) diganti jadi dibawah, pake action
+            // selain manggil login ke global storage
             this.props.login(res.data[0])
+
+            // pakai localstorage
+            // define localstorage.username terus dikasih isinya itu dia username dari user
+            // pakai localstorage spy abis login, kesimpen di localstorage
+            // karea redux itu kalo di refresh/reload, ilang datanya
+            localStorage.username = username
         })
         .catch((err) => (console.log(err)))
     }
 
     render () {
-        console.log(this.state.users)
+        // jd abis login, kalo username nya ada, ke redirect ke home dan UserName nya ganti
+        if (this.props.username) return <Redirect to='/' />
+
+        // console.log(this.state.users)
         return (
             <div style={styles.container}>
                 <h1>LOGIN</h1>
@@ -67,6 +80,12 @@ const styles = {
     }
 }
 
-export default connect(null, {login}) (Login)
+const mapStateToProps = (state) => {
+    return {
+        username: state.user.username
+    }
+}
+
+export default connect(mapStateToProps, {login}) (Login)
 // login yg dlm {} itu function login yg di action
 // Login yg di dalam () itu nama class yang diatas

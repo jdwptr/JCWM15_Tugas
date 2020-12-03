@@ -14,7 +14,16 @@ import { Link } from 'react-router-dom'
 // import connect
 import {connect} from 'react-redux'
 
+// import action logout
+import { logout } from '../action'
+
 class Navigation extends React.Component {
+    // buat kalo di klik logout, dia hilang & balik ke username
+    btnLogout = () => {
+        this.props.logout()
+        localStorage.removeItem('username')
+    }
+
     render() {
         return (
             <Navbar bg="dark" expand="lg">
@@ -50,8 +59,18 @@ class Navigation extends React.Component {
                             {/* UserName => jd kalo gagal login ga berubah jd nama kita, tetep UserName di dropdownnya */}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item as={Link} to="/Login">Login</Dropdown.Item>
-                            <Dropdown.Item>Register</Dropdown.Item>
+                            {/* bikin kayak gini supaya kalo abis klik login, masuk, di klik dropdown
+                            berubah jadi logout */}
+                            {this.props.username
+                            ?
+                            <Dropdown.Item onClick={this.btnLogout}>Logout</Dropdown.Item>
+                            :
+                            <>
+                                <Dropdown.Item as={Link} to="/Login">Login</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="/Register">Register</Dropdown.Item>
+                            </>
+                            }
+
                             {/* <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
                         </Dropdown.Menu>
                     </Dropdown>
@@ -74,4 +93,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps) (Navigation)
+export default connect(mapStateToProps, {logout}) (Navigation)

@@ -1,4 +1,8 @@
 import React from 'react'
+import Axios from 'axios'
+
+// import reactredux
+import { connect } from 'react-redux'
 
 // import navigation bar from components navbar
 import Navigation from './components/navbar.js'
@@ -14,9 +18,26 @@ import Linkpage from './pages/linkpage'
 import Berita1 from './pages/berita'
 import Table1 from './pages/tablejson'
 import Login from './pages/login'
+import Register from './pages/register'
 import Error from './pages/404notfound'
 
+// import action login
+import { login } from './action'
+
+// import login krn butuh u/ngirim data balik ke global state
+// import connect krn  mau nyambungin ablik data ke global storage
+
+// bikin localstorage nya di login.js
+
 class App extends React.Component {
+  // panggil lg supaya abis di refresh ga ilang
+  // atau (`http://localhost:2000/users?username=${localStorage.username}`)
+  componentDidMount () {
+    Axios.get (`http://localhost:2000/users?username=${localStorage.getItem('username')}`)
+    .then((res) => this.props.login(res.data[0]))
+    .catch((err) => console.log(err))
+  }
+
     render () {
       return (
       <div>
@@ -29,6 +50,7 @@ class App extends React.Component {
           <Route path='/berita' component={Berita1}/>
           <Route path='/tablejson' component={Table1}/>
           <Route path='/login' component={Login}/>
+          <Route path='/register' component={Register}/>
           <Route path="*" component={Error}/>
         </Switch>
       </div>
@@ -36,5 +58,5 @@ class App extends React.Component {
     }
   }
   
-  export default App
+  export default connect (null, {login}) (App)
   

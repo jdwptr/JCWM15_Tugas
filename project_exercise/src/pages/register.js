@@ -13,7 +13,15 @@ class Register extends React.Component {
         let password = this.refs.password.value
         let email = this.refs.email.value
 
-        
+        if (!username || !password || !email) return alert ('Input All Form')
+
+        Axios.post (`http://localhost:2000/users`, {
+            username: 'username',
+            password: 'password',
+            email: 'email'
+        })
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err))
     }
 
     render () {
@@ -45,21 +53,6 @@ const styles = {
 }
 
 export default Register
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // nambah ke database
 // JSON

@@ -10,7 +10,7 @@ class Table1 extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            dbUser: []
+            tabeljson: []
         }
     }
 
@@ -18,7 +18,7 @@ class Table1 extends React.Component {
         Axios.get('http://localhost:2000/tablejson')
             .then((res) => {
                 console.log(res.data)
-                this.setState ({dbUser: res.data})
+                this.setState ({tabeljson: res.data})
             })
             .catch((err) => console.log(err))
 
@@ -39,10 +39,10 @@ class Table1 extends React.Component {
     }
 
     tableBody = () => {
-        let {dbUser} = this.state
+        let {tabeljson} = this.state
         return (
             <tbody>
-                {dbUser.map((item, index) => {
+                {tabeljson.map((item, index) => {
                     return (
                         <tr key={index}>
                             <td>{index + 1}</td>
@@ -97,7 +97,7 @@ class Table1 extends React.Component {
         Axios.get('http://localhost:2000/tablejson')
             .then((res) => {
                 console.log(res.data)
-                this.setState({ dbUser: res.data })
+                this.setState({ tabeljson: res.data })
             })
             .catch((err) => console.log(err))
     }
@@ -142,7 +142,7 @@ class Table1 extends React.Component {
                 Axios.get('http://localhost:2000/tablejson')
                     .then((res) => {
                         console.log(res.data)
-                        this.setState({ dbUser: res.data })
+                        this.setState({ tabeljson: res.data })
                     })
                     .catch((err) => console.log(err))
             })
@@ -150,7 +150,7 @@ class Table1 extends React.Component {
     }
 
     render() {
-        console.log(this.state.dbUser)
+        console.log(this.state.tabeljson)
         return (
             <div>
                 <h1>TUGAS TABEL</h1>
